@@ -5,12 +5,16 @@ import {
   View,
   StyleSheet,
   TouchableWithoutFeedback,
+  useColorScheme,
 } from 'react-native';
 import {useDispatch} from 'react-redux';
-import {screenWidth, screenHeight} from '../utilis/screenSize';
+import {screenHeight} from '../utilis/screenSize';
 import {setId} from '../store/dishSlice';
+import {borderColor, mainBackground} from '../utilis/appColors';
 
 export default function Item({data, navigation}) {
+  const colorScheme = useColorScheme();
+  console.log(colorScheme);
   const dispatch = useDispatch();
 
   return (
@@ -19,41 +23,48 @@ export default function Item({data, navigation}) {
         navigation.navigate('DishDetails');
         dispatch(setId({id: data.item.id}));
       }}>
-      <View style={styles.itemsContainer}>
-        <View style={styles.imageContainer}>
+      <View style={styles(colorScheme).itemsContainer}>
+        <View style={styles(colorScheme).imageContainer}>
           <Image
             source={{uri: data.item.imageUrl}}
-            style={styles.image}
+            style={styles(colorScheme).image}
             resizeMode="contain"
           />
         </View>
-        <Text style={styles.title}>{data.item.name.toLowerCase()}</Text>
+        <Text style={styles(colorScheme).title}>
+          {data.item.name.toLowerCase()}
+        </Text>
       </View>
     </TouchableWithoutFeedback>
   );
 }
 
-const styles = StyleSheet.create({
-  itemsContainer: {
-    flex: 1,
-    marginTop: 10,
-    width: '100%',
-    alignContent: 'space-between',
-    alignItems: 'center',
-  },
-  imageContainer: {
-    width: screenWidth / 2 - 10,
-    height: screenHeight / 5,
-    backgroundColor: '#F8F8F9',
-    borderRadius: 5,
-  },
+const styles = colorScheme =>
+  StyleSheet.create({
+    itemsContainer: {
+      flex: 1,
+      height: screenHeight / 5,
+      alignContent: 'space-around',
+      alignItems: 'center',
+      borderColor: borderColor[colorScheme],
+      borderWidth: 1,
+      borderRadius: 5,
+      backgroundColor: mainBackground[colorScheme],
+      margin: 10,
+      overflow: 'hidden',
+    },
 
-  image: {
-    width: '100%',
-    height: '100%',
-  },
+    imageContainer: {
+      width: '100%',
+      height: '85%',
+    },
 
-  title: {
-    fontWeight: 'bold',
-  },
-});
+    image: {
+      width: '100%',
+      height: '100%',
+    },
+
+    title: {
+      fontWeight: '400',
+    },
+  });

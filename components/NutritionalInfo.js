@@ -1,42 +1,49 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, Button} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
+import ButtonNutritional from './ButtonNutritional';
 import TextTitleNormal from './TextTitleNormal';
 
 export default function NutritionalInfo({data}) {
   const [per, setPer] = useState(null);
-  const [servingButton, setServingButton] = useState(true);
-  const [gramsButton, setGramsButton] = useState(true);
+  const [selected, setSelected] = useState(null);
+  const [perGrams, setPerGrams] = useState(null);
+  const [perServing, setPerServing] = useState(null);
+
+  const perGramsHandler = () => {
+    setPer('per_100g');
+    setPerGrams(true);
+    setPerServing(false);
+    setSelected(true);
+  };
+
+  const perServingHandler = () => {
+    setPer('per_serving');
+    setPerServing(true);
+    setPerGrams(false);
+    setSelected(true);
+  };
 
   return (
     <>
-      <View>
-        {gramsButton && (
-          <Button
-            title="per 100g"
-            onPress={() => {
-              setPer('per_100g');
-              setGramsButton(false);
-              setServingButton(true);
-            }}
-          />
-        )}
-        {servingButton && (
-          <Button
-            title="per serving"
-            onPress={() => {
-              setPer('per_serving');
-              setServingButton(false);
-              setGramsButton(true);
-            }}
-          />
-        )}
+      <View style={styles.buttonsContainer}>
+        <ButtonNutritional
+          title="per 100g"
+          nutrition={perGramsHandler}
+          selected={selected && perGrams}
+        />
+
+        <ButtonNutritional
+          title="per serving"
+          nutrition={perServingHandler}
+          selected={selected && perServing}
+        />
       </View>
 
       {per && (
         <View style={styles.nutritionalContainer}>
           <Text style={styles.nutritionalTitle}>
-            Nutritional information{' '}
-            {per === 'per_100g' ? 'per 100g' : 'per serving'}
+            Nutritional information per{' '}
+            {per === 'per_100g' ? '100g' : 'serving'}
           </Text>
 
           <View style={styles.nutritionalContentLine}>
@@ -95,6 +102,10 @@ export default function NutritionalInfo({data}) {
 }
 
 const styles = StyleSheet.create({
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
   nutritionalContainer: {
     flex: 1,
     marginTop: 10,

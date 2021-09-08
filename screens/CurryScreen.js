@@ -4,6 +4,7 @@ import {FlatList, StyleSheet} from 'react-native';
 import {v4 as uuid} from 'uuid';
 import Item from '../components/Item';
 import useFetch from '../hooks/useFetch';
+import {iosBg} from '../utilis/appColors';
 
 export default function CurryScreen({navigation}) {
   const {data} = useFetch();
@@ -20,6 +21,6 @@ export default function CurryScreen({navigation}) {
 
 const styles = StyleSheet.create({
   screen: {
-    backgroundColor: 'white',
+    backgroundColor: iosBg,
   },
 });
