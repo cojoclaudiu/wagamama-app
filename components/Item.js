@@ -1,11 +1,13 @@
 import React from 'react';
 import {
-  Image,
   View,
   StyleSheet,
   TouchableWithoutFeedback,
   useColorScheme,
 } from 'react-native';
+
+import * as Animatable from 'react-native-animatable';
+
 import TextScheme from './TextScheme';
 import {useDispatch} from 'react-redux';
 import {screenHeight} from '../utilis/screenSize';
@@ -24,12 +26,16 @@ export default function Item({data, navigation}) {
       }}>
       <View style={styles(colorScheme).itemsContainer}>
         <View style={styles(colorScheme).imageContainer}>
-          <Image
-            source={{uri: data.item.imageUrl}}
+          <Animatable.Image
+            animation="bounceIn"
+            iterationCount={1}
+            defaultSource={require('../assets/images/placeholder.png')}
+            source={{uri: data?.item.imageUrl}}
             style={styles(colorScheme).image}
             resizeMode="contain"
           />
         </View>
+
         <TextScheme fontWeight={'500'}>
           {data.item.name.toLowerCase()}
         </TextScheme>

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, useColorScheme} from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import {borderColor} from '../utilis/appColors';
 import ButtonNutritional from './ButtonNutritional';
 import TextScheme from './TextScheme';
@@ -27,7 +28,7 @@ export default function NutritionalInfo({data}) {
 
   return (
     <>
-      <View style={styles().buttonsContainer}>
+      <Animatable.View animation="fadeIn" style={styles().buttonsContainer}>
         <ButtonNutritional
           title="per 100g"
           nutrition={perGramsHandler}
@@ -39,7 +40,7 @@ export default function NutritionalInfo({data}) {
           nutrition={perServingHandler}
           selected={selected && perServing}
         />
-      </View>
+      </Animatable.View>
 
       {per && (
         <View style={styles(colorScheme).nutritionalContainer}>

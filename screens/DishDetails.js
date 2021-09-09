@@ -6,18 +6,21 @@ import {
   Image,
   useColorScheme,
 } from 'react-native';
+
+import * as Animatable from 'react-native-animatable';
 import TextScheme from '../components/TextScheme';
 import {useSelector} from 'react-redux';
 import useFetch from '../hooks/useFetch';
 import {screenHeight, screenWidth} from '../utilis/screenSize';
 import NutritionalInfo from '../components/NutritionalInfo';
 import {mainBackground} from '../utilis/appColors';
+import LoadingScreen from '../components/LoadingScreen';
 
 export default function DishDetails({navigation}) {
   const colorScheme = useColorScheme();
 
   const id = useSelector(state => state.dishId.id);
-  const {data} = useFetch();
+  const {data, loading} = useFetch();
   const itemDetails = data?.find(item => item.id === id);
 
   useEffect(() => {
@@ -26,12 +29,16 @@ export default function DishDetails({navigation}) {
     });
   }, [itemDetails, navigation]);
 
-  return (
+  return data && !loading ? (
     <ScrollView
       showsVerticalScrollIndicator={false}
       style={styles(colorScheme).screen}>
       <View style={styles().imageContainer}>
-        <Image style={styles().image} source={{uri: itemDetails?.imageUrl}} />
+        <Animatable.Image
+          animation="fadeInDownBig"
+          style={styles().image}
+          source={{uri: itemDetails?.imageUrl}}
+        />
       </View>
 
       <View style={styles(colorScheme).itemDetails}>
@@ -48,6 +55,8 @@ export default function DishDetails({navigation}) {
         <NutritionalInfo data={itemDetails} />
       </View>
     </ScrollView>
+  ) : (
+    <LoadingScreen />
   );
 }
 
