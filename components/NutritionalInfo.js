@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet, useColorScheme} from 'react-native';
+import {borderColor} from '../utilis/appColors';
 import ButtonNutritional from './ButtonNutritional';
-import TextTitleNormal from './TextTitleNormal';
+import TextScheme from './TextScheme';
 
 export default function NutritionalInfo({data}) {
+  const colorScheme = useColorScheme();
   const [per, setPer] = useState(null);
   const [selected, setSelected] = useState(null);
   const [perGrams, setPerGrams] = useState(null);
@@ -25,7 +27,7 @@ export default function NutritionalInfo({data}) {
 
   return (
     <>
-      <View style={styles.buttonsContainer}>
+      <View style={styles().buttonsContainer}>
         <ButtonNutritional
           title="per 100g"
           nutrition={perGramsHandler}
@@ -40,60 +42,69 @@ export default function NutritionalInfo({data}) {
       </View>
 
       {per && (
-        <View style={styles.nutritionalContainer}>
-          <Text style={styles.nutritionalTitle}>
+        <View style={styles(colorScheme).nutritionalContainer}>
+          <TextScheme fontSize={16} fontWeight="bold">
             Nutritional information per{' '}
             {per === 'per_100g' ? '100g' : 'serving'}
-          </Text>
+          </TextScheme>
 
-          <View style={styles.nutritionalContentLine}>
-            <TextTitleNormal>Carbs: </TextTitleNormal>
-            <Text>{data?.nutritional_information[per].carbs}</Text>
+          <View style={styles(colorScheme).nutritionalContentLine}>
+            <TextScheme fontWeight="bold">Carbs: </TextScheme>
+            <TextScheme>{data?.nutritional_information[per].carbs}</TextScheme>
           </View>
 
-          <View style={styles.nutritionalContentLine}>
-            <TextTitleNormal>Kcal: </TextTitleNormal>
-            <Text>{data?.nutritional_information[per].energy.kcal}</Text>
+          <View style={styles(colorScheme).nutritionalContentLine}>
+            <TextScheme fontWeight="bold">Kcal: </TextScheme>
+            <TextScheme>
+              {data?.nutritional_information[per].energy.kcal}
+            </TextScheme>
           </View>
 
-          <View style={styles.nutritionalContentLine}>
-            <TextTitleNormal>Kj: </TextTitleNormal>
-            <Text> {data?.nutritional_information[per].energy.kj}</Text>
+          <View style={styles(colorScheme).nutritionalContentLine}>
+            <TextScheme fontWeight="bold">Kj: </TextScheme>
+            <TextScheme>
+              {' '}
+              {data?.nutritional_information[per].energy.kj}
+            </TextScheme>
           </View>
 
-          <View style={styles.nutritionalContentLine}>
-            <TextTitleNormal>Fat: </TextTitleNormal>
-            <Text>{data?.nutritional_information[per].fat}</Text>
+          <View style={styles(colorScheme).nutritionalContentLine}>
+            <TextScheme fontWeight="bold">Fat: </TextScheme>
+            <TextScheme>{data?.nutritional_information[per].fat}</TextScheme>
           </View>
 
-          <View style={styles.nutritionalContentLine}>
-            <TextTitleNormal>Fibre: </TextTitleNormal>
-            <Text>{data?.nutritional_information[per].fibre}</Text>
+          <View style={styles(colorScheme).nutritionalContentLine}>
+            <TextScheme fontWeight="bold">Fibre: </TextScheme>
+            <TextScheme>{data?.nutritional_information[per].fibre}</TextScheme>
           </View>
 
-          <View style={styles.nutritionalContentLine}>
-            <TextTitleNormal>Protein: </TextTitleNormal>
-            <Text>{data?.nutritional_information[per].protein}</Text>
+          <View style={styles(colorScheme).nutritionalContentLine}>
+            <TextScheme fontWeight="bold">Protein: </TextScheme>
+            <TextScheme>
+              {data?.nutritional_information[per].protein}
+            </TextScheme>
           </View>
 
-          <View style={styles.nutritionalContentLine}>
-            <TextTitleNormal>Salt: </TextTitleNormal>
-            <Text>{data?.nutritional_information[per].salt}</Text>
+          <View style={styles(colorScheme).nutritionalContentLine}>
+            <TextScheme fontWeight="bold">Salt: </TextScheme>
+            <TextScheme>{data?.nutritional_information[per].salt}</TextScheme>
           </View>
 
-          <View style={styles.nutritionalContentLine}>
-            <TextTitleNormal>Saturated fat: </TextTitleNormal>
-            <Text>{data?.nutritional_information[per].sat_fat}</Text>
+          <View style={styles(colorScheme).nutritionalContentLine}>
+            <TextScheme fontWeight="bold">Saturated fat: </TextScheme>
+            <TextScheme>
+              {data?.nutritional_information[per].sat_fat}
+            </TextScheme>
           </View>
 
-          <View style={styles.nutritionalContentLine}>
-            <TextTitleNormal>Sodium: </TextTitleNormal>
-            <Text>{data?.nutritional_information[per].sodium}</Text>
+          <View style={styles(colorScheme).nutritionalContentLine}>
+            <TextScheme fontWeight="bold">Sodium: </TextScheme>
+            <TextScheme>{data?.nutritional_information[per].sodium}</TextScheme>
           </View>
 
-          <View style={styles.nutritionalContentLineLastChild}>
-            <TextTitleNormal>Sugar: </TextTitleNormal>
-            <Text>{data?.nutritional_information[per].sodium}</Text>
+          <View style={styles().nutritionalContentLineLastChild}>
+            <TextScheme fontWeight="bold">Sugar: </TextScheme>
+            <TextScheme>{data?.nutritional_information[per].sodium}</TextScheme>
           </View>
         </View>
       )}
@@ -101,32 +112,33 @@ export default function NutritionalInfo({data}) {
   );
 }
 
-const styles = StyleSheet.create({
-  buttonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  nutritionalContainer: {
-    flex: 1,
-    marginTop: 10,
-  },
-  nutritionalTitle: {
-    fontSize: 16,
-    // fontWeight: 'bold',
-  },
+const styles = colorScheme =>
+  StyleSheet.create({
+    buttonsContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+    },
+    nutritionalContainer: {
+      flex: 1,
+      marginTop: 10,
+    },
+    nutritionalTitle: {
+      fontSize: 16,
+      // fontWeight: 'bold',
+    },
 
-  nutritionalContentLine: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    borderBottomColor: '#D9DADD',
-    borderBottomWidth: 1,
-    height: 40,
-    // backgroundColor: 'blue',
-  },
+    nutritionalContentLine: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      borderBottomColor: borderColor[colorScheme],
+      borderBottomWidth: 1,
+      height: 40,
+      // backgroundColor: 'blue',
+    },
 
-  nutritionalContentLineLastChild: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    height: 50,
-  },
-});
+    nutritionalContentLineLastChild: {
+      alignItems: 'center',
+      flexDirection: 'row',
+      height: 50,
+    },
+  });

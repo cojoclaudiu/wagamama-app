@@ -1,20 +1,19 @@
 import React from 'react';
 import {
   Image,
-  Text,
   View,
   StyleSheet,
   TouchableWithoutFeedback,
   useColorScheme,
 } from 'react-native';
+import TextScheme from './TextScheme';
 import {useDispatch} from 'react-redux';
 import {screenHeight} from '../utilis/screenSize';
 import {setId} from '../store/dishSlice';
-import {borderColor, mainBackground} from '../utilis/appColors';
+import {borderThumbnail, itemThumbnail} from '../utilis/appColors';
 
 export default function Item({data, navigation}) {
   const colorScheme = useColorScheme();
-  console.log(colorScheme);
   const dispatch = useDispatch();
 
   return (
@@ -31,9 +30,9 @@ export default function Item({data, navigation}) {
             resizeMode="contain"
           />
         </View>
-        <Text style={styles(colorScheme).title}>
+        <TextScheme fontWeight={'500'}>
           {data.item.name.toLowerCase()}
-        </Text>
+        </TextScheme>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -46,10 +45,10 @@ const styles = colorScheme =>
       height: screenHeight / 5,
       alignContent: 'space-around',
       alignItems: 'center',
-      borderColor: borderColor[colorScheme],
+      borderColor: borderThumbnail[colorScheme],
       borderWidth: 1,
       borderRadius: 5,
-      backgroundColor: mainBackground[colorScheme],
+      backgroundColor: itemThumbnail[colorScheme],
       margin: 10,
       overflow: 'hidden',
     },

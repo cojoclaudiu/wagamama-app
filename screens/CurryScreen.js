@@ -1,16 +1,16 @@
 import React from 'react';
-import {FlatList, StyleSheet} from 'react-native';
+import {FlatList, StyleSheet, useColorScheme} from 'react-native';
 
 import {v4 as uuid} from 'uuid';
 import Item from '../components/Item';
 import useFetch from '../hooks/useFetch';
-import {iosBg} from '../utilis/appColors';
+import {screenBackground} from '../utilis/appColors';
 
 export default function CurryScreen({navigation}) {
   const {data} = useFetch();
   return (
     <FlatList
-      style={styles.screen}
+      style={styles(useColorScheme()).screen}
       data={data}
       numColumns={2}
       keyExtractor={() => uuid()}
@@ -19,8 +19,9 @@ export default function CurryScreen({navigation}) {
   );
 }
 
-const styles = StyleSheet.create({
-  screen: {
-    backgroundColor: iosBg,
-  },
-});
+const styles = colorScheme =>
+  StyleSheet.create({
+    screen: {
+      backgroundColor: screenBackground[colorScheme],
+    },
+  });

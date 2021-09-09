@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   ScrollView,
   Image,
   useColorScheme,
 } from 'react-native';
+import TextScheme from '../components/TextScheme';
 import {useSelector} from 'react-redux';
 import useFetch from '../hooks/useFetch';
 import {screenHeight, screenWidth} from '../utilis/screenSize';
@@ -35,16 +35,14 @@ export default function DishDetails({navigation}) {
       </View>
 
       <View style={styles(colorScheme).itemDetails}>
-        <Text>{itemDetails?.description}</Text>
-        <Text>Price: {itemDetails?.price}</Text>
+        <TextScheme>{itemDetails?.description}</TextScheme>
+        <TextScheme>
+          <TextScheme>Price:</TextScheme> {itemDetails?.price}
+        </TextScheme>
 
         <View style={styles().allergensContainer}>
-          <Text numoFline={1} style={styles.allergensTitle}>
-            Allergens:{' '}
-          </Text>
-          <Text style={styles().allergens}>
-            {itemDetails?.allergens.join(', ')}
-          </Text>
+          <TextScheme numofLine={1}>Allergens: </TextScheme>
+          <TextScheme>{itemDetails?.allergens.join(', ')}</TextScheme>
         </View>
 
         <NutritionalInfo data={itemDetails} />
