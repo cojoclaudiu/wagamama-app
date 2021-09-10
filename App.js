@@ -8,7 +8,7 @@ import DishScreen from './screens/DishScreen';
 import DishDetails from './screens/DishDetails';
 import {Provider} from 'react-redux';
 import {store} from './store/store';
-import {headerColor, textColor} from './utilis/appColors';
+import {headerColor, redWaga, textColor} from './utilis/appColors';
 
 const Stack = createNativeStackNavigator();
 
@@ -69,7 +69,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   starIcon: {
-    color: '#D93633',
+    color: redWaga,
     fontSize: 30,
     fontWeight: 'bold',
     marginLeft: 102,

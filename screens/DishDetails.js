@@ -7,7 +7,11 @@ import {useSelector} from 'react-redux';
 import useFetch from '../hooks/useFetch';
 import {screenHeight, screenWidth} from '../utilis/screenSize';
 import NutritionalInfo from '../components/NutritionalInfo';
-import {mainBackground} from '../utilis/appColors';
+import {
+  mainBackground,
+  screenBackground,
+  textDarkBg,
+} from '../utilis/appColors';
 import LoadingScreen from '../components/LoadingScreen';
 import apiCategory from '../utilis/apiRoutes';
 import Allergens from '../components/Allergens';
@@ -40,11 +44,14 @@ export default function DishDetails({navigation}) {
       </View>
 
       <View style={styles(colorScheme).itemDetails}>
-        <TextScheme style={styles().description}>
-          {itemDetails?.description}
-        </TextScheme>
-        <Price data={itemDetails} />
-        <Allergens data={itemDetails} />
+        <Animatable.View animation="slideInRight">
+          <Price data={itemDetails} colorScheme={colorScheme} />
+          <TextScheme style={styles(colorScheme).description}>
+            {itemDetails?.description}
+          </TextScheme>
+        </Animatable.View>
+
+        <Allergens data={itemDetails} colorScheme={colorScheme} />
         <NutritionalInfo data={itemDetails} />
       </View>
     </ScrollView>
@@ -67,6 +74,12 @@ const styles = colorScheme =>
 
     description: {
       textAlign: 'justify',
+      backgroundColor:
+        colorScheme === 'dark' ? textDarkBg : screenBackground.light,
+      borderRadius: 4,
+      padding: 10,
+      overflow: 'hidden',
+      marginTop: 10,
     },
 
     imageContainer: {

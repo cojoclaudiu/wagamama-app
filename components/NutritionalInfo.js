@@ -28,19 +28,23 @@ export default function NutritionalInfo({data}) {
 
   return (
     <>
-      <Animatable.View animation="fadeIn" style={styles().buttonsContainer}>
-        <ButtonNutritional
-          title="per 100g"
-          nutrition={perGramsHandler}
-          selected={selected && perGrams}
-        />
+      <View style={styles().buttonsContainer}>
+        <Animatable.View animation="slideInLeft">
+          <ButtonNutritional
+            title="per 100g"
+            nutrition={perGramsHandler}
+            selected={selected && perGrams}
+          />
+        </Animatable.View>
 
-        <ButtonNutritional
-          title="per serving"
-          nutrition={perServingHandler}
-          selected={selected && perServing}
-        />
-      </Animatable.View>
+        <Animatable.View animation="slideInRight">
+          <ButtonNutritional
+            title="per serving"
+            nutrition={perServingHandler}
+            selected={selected && perServing}
+          />
+        </Animatable.View>
+      </View>
 
       {per && (
         <View style={styles(colorScheme).nutritionalContainer}>

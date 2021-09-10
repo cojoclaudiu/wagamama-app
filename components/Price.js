@@ -2,11 +2,12 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import TextScheme from './TextScheme';
 import priceFormat from '../utilis/priceFormat';
+import {greenWaga, textColor} from '../utilis/appColors';
 
-export default function Price({data}) {
+export default function Price({data, colorScheme}) {
   return (
     <View style={styles().priceContainer}>
-      <TextScheme style={styles().priceLabel}>Price:</TextScheme>
+      <TextScheme style={styles(colorScheme).priceLabel}>Price</TextScheme>
       <TextScheme style={styles().priceValue}>
         {priceFormat(data?.price)}
       </TextScheme>
@@ -14,7 +15,7 @@ export default function Price({data}) {
   );
 }
 
-const styles = () =>
+const styles = colorScheme =>
   StyleSheet.create({
     priceContainer: {
       flexDirection: 'row',
@@ -26,9 +27,11 @@ const styles = () =>
 
     priceLabel: {
       borderRadius: 4,
-      backgroundColor: '#53C351',
+      borderColor: colorScheme === 'light' ? greenWaga : 'transparent',
+      borderWidth: colorScheme === 'light' ? 1 : 0,
+      backgroundColor: colorScheme === 'light' ? 'transparent' : greenWaga,
       fontWeight: '500',
-      color: 'white',
+      color: colorScheme === 'light' ? greenWaga : textColor.light,
       overflow: 'hidden',
       paddingHorizontal: 5,
       paddingVertical: 2,

@@ -1,20 +1,24 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import TextScheme from './TextScheme';
 import {screenWidth} from '../utilis/screenSize';
+import * as Animatable from 'react-native-animatable';
+import {allergensBackground, redWaga, textColor} from '../utilis/appColors';
 
-export default function Allergens({data}) {
+export default function Allergens({data, colorScheme}) {
   return (
-    <View style={styles().allergensContainer}>
-      <TextScheme fontWeight="500" style={styles().allergensLabel}>
-        allergens:
+    <Animatable.View
+      animation="slideInLeft"
+      style={styles(colorScheme).allergensContainer}>
+      <TextScheme fontWeight="500" style={styles(colorScheme).allergensLabel}>
+        allergens
       </TextScheme>
       <TextScheme fontWeight="500">{data?.allergens.join(', ')}</TextScheme>
-    </View>
+    </Animatable.View>
   );
 }
 
-const styles = () =>
+const styles = colorScheme =>
   StyleSheet.create({
     allergensContainer: {
       flex: 1,
@@ -22,18 +26,19 @@ const styles = () =>
       alignSelf: 'center',
       width: screenWidth - 40,
       marginVertical: 10,
-      backgroundColor: '#F2F3F3',
+      backgroundColor: allergensBackground[colorScheme],
       borderRadius: 4,
-      paddingHorizontal: 5,
-      paddingVertical: 5,
+      padding: 10,
     },
 
     allergensLabel: {
       alignSelf: 'flex-start',
 
       borderRadius: 4,
-      backgroundColor: '#E63228',
-      color: 'white',
+      borderColor: colorScheme === 'light' ? redWaga : 'transparent',
+      borderWidth: colorScheme === 'light' ? 1 : 0,
+      color: colorScheme === 'light' ? redWaga : textColor.light,
+      backgroundColor: colorScheme === 'light' ? 'transparent' : redWaga,
       overflow: 'hidden',
 
       paddingHorizontal: 5,
