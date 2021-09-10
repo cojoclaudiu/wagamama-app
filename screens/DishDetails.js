@@ -1,11 +1,5 @@
 import React, {useEffect} from 'react';
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Image,
-  useColorScheme,
-} from 'react-native';
+import {View, StyleSheet, ScrollView, useColorScheme} from 'react-native';
 
 import * as Animatable from 'react-native-animatable';
 import TextScheme from '../components/TextScheme';
@@ -15,12 +9,14 @@ import {screenHeight, screenWidth} from '../utilis/screenSize';
 import NutritionalInfo from '../components/NutritionalInfo';
 import {mainBackground} from '../utilis/appColors';
 import LoadingScreen from '../components/LoadingScreen';
+import apiCategory from '../utilis/apiRoutes';
 
 export default function DishDetails({navigation}) {
   const colorScheme = useColorScheme();
+  const category = useSelector(state => state.category.category.category);
 
   const id = useSelector(state => state.dishId.id);
-  const {data, loading} = useFetch();
+  const {data, loading} = useFetch(apiCategory(category));
   const itemDetails = data?.find(item => item.id === id);
 
   useEffect(() => {

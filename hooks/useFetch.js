@@ -1,10 +1,7 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 
-const url =
-  'https://wagamama-api-default-rtdb.europe-west1.firebasedatabase.app/curry.json';
-
-function useFetch() {
+function useFetch(url) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState(null);
@@ -29,7 +26,7 @@ function useFetch() {
     return () => {
       source.cancel();
     };
-  }, []);
+  }, [url]);
 
   return {data, loading, error};
 }

@@ -4,8 +4,7 @@ import TextScheme from './components/TextScheme';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
-import DetailsScreen from './screens/DetailsScreen';
-import CurryScreen from './screens/CurryScreen';
+import DishScreen from './screens/DishScreen';
 import DishDetails from './screens/DishDetails';
 import {Provider} from 'react-redux';
 import {store} from './store/store';
@@ -26,6 +25,8 @@ const stackNavStyle = colorScheme => {
 };
 
 export default function App() {
+  const colorScheme = useColorScheme();
+
   return (
     <Provider store={store}>
       <NavigationContainer>
@@ -46,19 +47,19 @@ export default function App() {
                 );
               },
               title: 'wagamama',
-              ...stackNavStyle(useColorScheme()),
+              ...stackNavStyle(colorScheme),
             }}
           />
-          <Stack.Screen name="Details" component={DetailsScreen} />
+
           <Stack.Screen
-            name="Curry"
-            component={CurryScreen}
-            options={stackNavStyle(useColorScheme())}
+            name="DishScreen"
+            component={DishScreen}
+            options={stackNavStyle(colorScheme)}
           />
           <Stack.Screen
             name="DishDetails"
             component={DishDetails}
-            options={stackNavStyle(useColorScheme())}
+            options={stackNavStyle(colorScheme)}
           />
         </Stack.Navigator>
       </NavigationContainer>
