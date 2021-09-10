@@ -2,6 +2,8 @@
  * @format
  */
 import 'react-native-get-random-values';
+import 'intl';
+import 'intl/locale-data/jsonp/en';
 
 import {AppRegistry} from 'react-native';
 import App from './App';

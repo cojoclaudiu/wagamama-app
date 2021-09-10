@@ -13,7 +13,7 @@ export default function HomeScreen({navigation}) {
       <HomeScreenDetails />
 
       <Button
-        title="Go to Ramen..."
+        title="Go to RAMEN..."
         onPress={() => {
           dispatch(setCategory({category: 'ramen'}));
           navigation.navigate('DishScreen');
@@ -24,6 +24,13 @@ export default function HomeScreen({navigation}) {
         title="Go to CURRY..."
         onPress={() => {
           dispatch(setCategory({category: 'curry'}));
+          navigation.navigate('DishScreen');
+        }}
+      />
+      <Button
+        title="Go to TEPPANYAKI..."
+        onPress={() => {
+          dispatch(setCategory({category: 'teppanyaki'}));
           navigation.navigate('DishScreen');
         }}
       />

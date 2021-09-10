@@ -1,5 +1,11 @@
 import React, {useEffect} from 'react';
-import {View, StyleSheet, ScrollView, useColorScheme} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  useColorScheme,
+  Button,
+} from 'react-native';
 
 import * as Animatable from 'react-native-animatable';
 import TextScheme from '../components/TextScheme';
@@ -16,8 +22,11 @@ import LoadingScreen from '../components/LoadingScreen';
 import apiCategory from '../utilis/apiRoutes';
 import Allergens from '../components/Allergens';
 import Price from '../components/Price';
+import {useDispatch} from 'react-redux';
+import {addToFavorite} from '../store/favoriteSlice';
 
-export default function DishDetails({navigation}) {
+export default function DishDetails({navigation, favorite}) {
+  const dispatch = useDispatch();
   const colorScheme = useColorScheme();
   const category = useSelector(state => state.category.category.category);
 
@@ -42,6 +51,20 @@ export default function DishDetails({navigation}) {
           source={{uri: itemDetails?.imageUrl}}
         />
       </View>
+
+      <Button
+        title="add to fav"
+        onPress={() => {
+          dispatch(
+            addToFavorite({
+              id: itemDetails?.id,
+              name: itemDetails?.name,
+              image: itemDetails?.imageUrl,
+              price: itemDetails?.price,
+            }),
+          );
+        }}
+      />
 
       <View style={styles(colorScheme).itemDetails}>
         <Animatable.View animation="slideInRight">

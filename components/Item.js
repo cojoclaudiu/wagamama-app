@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   View,
+  Text,
   Image,
   StyleSheet,
   TouchableWithoutFeedback,
@@ -28,12 +29,16 @@ export default function Item({data, navigation}) {
       <View style={styles(colorScheme).itemsContainer}>
         <View style={styles(colorScheme).imageContainer}>
           <Animatable.View animation="bounceIn" iterationCount={1}>
-            <Image
-              defaultSource={require('../assets/images/placeholder.png')}
-              source={{uri: data?.item.imageUrl}}
-              style={styles(colorScheme).image}
-              resizeMode="contain"
-            />
+            {!data ? (
+              <Text>Loading...</Text>
+            ) : (
+              <Image
+                defaultSource={require('../assets/images/placeholder.png')}
+                source={{uri: data?.item.imageUrl}}
+                style={styles(colorScheme).image}
+                resizeMode="contain"
+              />
+            )}
           </Animatable.View>
         </View>
 
