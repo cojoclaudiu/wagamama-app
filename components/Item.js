@@ -36,7 +36,7 @@ export default function Item({data, navigation}) {
           />
         </View>
 
-        <TextScheme fontWeight={'500'}>
+        <TextScheme numberOfLines={1} ellipsizeMode="tail" fontWeight={'500'}>
           {data.item.name.toLowerCase()}
         </TextScheme>
       </View>

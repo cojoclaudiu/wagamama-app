@@ -10,6 +10,8 @@ import NutritionalInfo from '../components/NutritionalInfo';
 import {mainBackground} from '../utilis/appColors';
 import LoadingScreen from '../components/LoadingScreen';
 import apiCategory from '../utilis/apiRoutes';
+import Allergens from '../components/Allergens';
+import Price from '../components/Price';
 
 export default function DishDetails({navigation}) {
   const colorScheme = useColorScheme();
@@ -38,16 +40,11 @@ export default function DishDetails({navigation}) {
       </View>
 
       <View style={styles(colorScheme).itemDetails}>
-        <TextScheme>{itemDetails?.description}</TextScheme>
-        <TextScheme>
-          <TextScheme>Price:</TextScheme> {itemDetails?.price}
+        <TextScheme style={styles().description}>
+          {itemDetails?.description}
         </TextScheme>
-
-        <View style={styles().allergensContainer}>
-          <TextScheme numofLine={1}>Allergens: </TextScheme>
-          <TextScheme>{itemDetails?.allergens.join(', ')}</TextScheme>
-        </View>
-
+        <Price data={itemDetails} />
+        <Allergens data={itemDetails} />
         <NutritionalInfo data={itemDetails} />
       </View>
     </ScrollView>
@@ -65,7 +62,11 @@ const styles = colorScheme =>
 
     itemDetails: {
       paddingHorizontal: 20,
-      color: 'red',
+      // alignItems: 'center',
+    },
+
+    description: {
+      textAlign: 'justify',
     },
 
     imageContainer: {
@@ -76,18 +77,5 @@ const styles = colorScheme =>
     image: {
       width: '100%',
       height: '100%',
-    },
-
-    allergensContainer: {
-      flexDirection: 'row',
-    },
-
-    allergensTitle: {
-      fontWeight: 'bold',
-      color: '#E42521',
-    },
-
-    allergens: {
-      width: screenWidth / 1.5,
     },
   });
