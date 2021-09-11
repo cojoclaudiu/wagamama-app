@@ -5,8 +5,9 @@ import * as Animatable from 'react-native-animatable';
 import TextScheme from './TextScheme';
 import {setId} from '../store/dishSlice';
 import {setCategory} from '../store/categorySlice';
-import {itemThumbnail, borderThumbnail} from '../utilis/appColors';
+import {itemThumbnail, borderThumbnail, redWaga} from '../utilis/appColors';
 import {screenWidth} from '../utilis/screenSize';
+import Icon from 'react-native-ionicons';
 
 export default function FavoriteItem({navigation, item, colorScheme}) {
   const dispatch = useDispatch();
@@ -21,10 +22,21 @@ export default function FavoriteItem({navigation, item, colorScheme}) {
       <Animatable.View
         animation="zoomIn"
         style={styles(colorScheme).favoriteItemContainer}>
-        <Image style={styles().image} source={{uri: item.image}} />
-        <View>
-          <TextScheme fontWeight="500">{item.name}</TextScheme>
-          <TextScheme>category: {item.category}</TextScheme>
+        <View style={styles().detailsContainer}>
+          <Image style={styles().image} source={{uri: item.image}} />
+          <View>
+            <TextScheme fontWeight="500">{item.name}</TextScheme>
+            <TextScheme>category: {item.category}</TextScheme>
+          </View>
+        </View>
+
+        <View style={styles().removeIcon}>
+          <Icon
+            ios="ios-remove-circle"
+            android="md-remove-circle"
+            size={27}
+            color={redWaga}
+          />
         </View>
       </Animatable.View>
     </TouchableWithoutFeedback>
@@ -34,8 +46,9 @@ export default function FavoriteItem({navigation, item, colorScheme}) {
 const styles = colorScheme =>
   StyleSheet.create({
     favoriteItemContainer: {
-      flexDirection: 'row',
       alignItems: 'center',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
       width: screenWidth - 40,
       backgroundColor: itemThumbnail[colorScheme],
       borderColor: borderThumbnail[colorScheme],
@@ -43,8 +56,18 @@ const styles = colorScheme =>
       borderRadius: 5,
       marginVertical: 5,
     },
+
+    detailsContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+
     image: {
       width: 80,
       height: 80,
+    },
+
+    removeIcon: {
+      marginRight: 15,
     },
   });

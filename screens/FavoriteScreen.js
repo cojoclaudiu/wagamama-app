@@ -16,6 +16,9 @@ export default function FavoriteScreen({navigation}) {
   const favorite = useSelector(state => state.favorite);
   const {totalItems, favItems} = favorite;
 
+  // I'm reversing the array because my last added item have to be first on the list
+  const reverseItems = [...favItems].reverse();
+
   return totalItems === 0 ? (
     <View style={styles(colorScheme).screen}>
       <Text>You don't any favorite dishes, find your favorites</Text>
@@ -25,7 +28,7 @@ export default function FavoriteScreen({navigation}) {
       <FlatList
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
-        data={favItems}
+        data={reverseItems}
         renderItem={({item}) => (
           <FavoriteItem
             colorScheme={colorScheme}
