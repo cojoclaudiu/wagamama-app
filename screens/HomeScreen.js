@@ -13,6 +13,13 @@ export default function HomeScreen({navigation}) {
       <HomeScreenDetails />
 
       <Button
+        title="Favorites"
+        onPress={() => {
+          navigation.navigate('Favorite');
+        }}
+      />
+
+      <Button
         title="Go to RAMEN..."
         onPress={() => {
           dispatch(setCategory({category: 'ramen'}));

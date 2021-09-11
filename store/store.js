@@ -7,6 +7,6 @@ export const store = configureStore({
   reducer: {
     dishId: dishReducer,
     category: categoryReducer,
-    addToFavorite: favoriteReducer,
+    favorite: favoriteReducer,
   },
 });

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {FlatList, StyleSheet, useColorScheme} from 'react-native';
+import {FlatList, StyleSheet, useColorScheme, SafeAreaView} from 'react-native';
 
 import {v4 as uuid} from 'uuid';
 import Item from '../components/Item';
@@ -10,10 +10,11 @@ import {useSelector} from 'react-redux';
 import apiCategory from '../utilis/apiRoutes';
 
 export default function DishScreen({navigation}) {
+  const colorScheme = useColorScheme();
+
   const category = useSelector(state => state.category.category.category);
   const url = apiCategory(category);
 
-  const colorScheme = useColorScheme();
   const {data, loading} = useFetch(url);
 
   useEffect(() => {
@@ -23,9 +24,10 @@ export default function DishScreen({navigation}) {
   }, [category, navigation]);
 
   return data && !loading ? (
-    <>
+    <SafeAreaView
+      edges={['left', 'right', 'bottom']}
+      style={styles(colorScheme).screen}>
       <FlatList
-        style={styles(colorScheme).screen}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         contentInsetAdjustmentBehavior="automatic"
@@ -34,7 +36,7 @@ export default function DishScreen({navigation}) {
         keyExtractor={() => uuid()}
         renderItem={dataArr => <Item navigation={navigation} data={dataArr} />}
       />
-    </>
+    </SafeAreaView>
   ) : (
     <LoadingScreen />
   );
@@ -44,6 +46,5 @@ const styles = colorScheme =>
   StyleSheet.create({
     screen: {
       backgroundColor: screenBackground[colorScheme],
-      paddingBottom: 10,
     },
   });

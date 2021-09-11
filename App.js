@@ -1,19 +1,15 @@
 import React from 'react';
-import {
-  StyleSheet,
-  TouchableWithoutFeedback,
-  useColorScheme,
-} from 'react-native';
+import {StyleSheet, useColorScheme} from 'react-native';
 import TextScheme from './components/TextScheme';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
-import DishScreen from './screens/DishScreen';
+import DishScreen from './screens/DishListScreen.js';
 import DishDetails from './screens/DishDetails';
 import {Provider} from 'react-redux';
 import {store} from './store/store';
 import {headerColor, redWaga, textColor} from './utilis/appColors';
-import Icon from 'react-native-ionicons';
+import FavoriteScreen from './screens/FavoriteScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,7 +25,7 @@ const stackNavStyle = colorScheme => {
   };
 };
 
-export default function App(props) {
+export default function App() {
   const colorScheme = useColorScheme();
 
   return (
@@ -66,16 +62,14 @@ export default function App(props) {
             component={DishDetails}
             options={{
               ...stackNavStyle(colorScheme),
-              headerRight: () => (
-                <TouchableWithoutFeedback
-                  onPress={() => console.log('pressed')}>
-                  <Icon
-                    size={27}
-                    ios="ios-heart-empty"
-                    android="md-heart-empty"
-                  />
-                </TouchableWithoutFeedback>
-              ),
+            }}
+          />
+
+          <Stack.Screen
+            name="Favorite"
+            component={FavoriteScreen}
+            options={{
+              ...stackNavStyle(colorScheme),
             }}
           />
         </Stack.Navigator>

@@ -42,7 +42,10 @@ export default function Item({data, navigation}) {
           </Animatable.View>
         </View>
 
-        <TextScheme numberOfLines={1} ellipsizeMode="tail" fontWeight={'500'}>
+        <TextScheme
+          numberOfLines={1}
+          ellipsizeMode="tail"
+          style={styles().title}>
           {data.item.name.toLowerCase()}
         </TextScheme>
       </View>
@@ -77,5 +80,7 @@ const styles = colorScheme =>
 
     title: {
       fontWeight: '400',
+      width: '80%',
+      textAlign: 'center',
     },
   });
