@@ -1,5 +1,11 @@
 import React from 'react';
-import {TouchableWithoutFeedback, StyleSheet, View, Image} from 'react-native';
+import {
+  TouchableWithoutFeedback,
+  StyleSheet,
+  View,
+  Image,
+  LayoutAnimation,
+} from 'react-native';
 import {useDispatch} from 'react-redux';
 import * as Animatable from 'react-native-animatable';
 import TextScheme from './TextScheme';
@@ -8,6 +14,7 @@ import {setCategory} from '../store/categorySlice';
 import {itemThumbnail, borderThumbnail, redWaga} from '../utilis/appColors';
 import {screenWidth} from '../utilis/screenSize';
 import Icon from 'react-native-ionicons';
+import {removeFromFavorite} from '../store/favoriteSlice';
 
 export default function FavoriteItem({navigation, item, colorScheme}) {
   const dispatch = useDispatch();
@@ -29,15 +36,27 @@ export default function FavoriteItem({navigation, item, colorScheme}) {
             <TextScheme>category: {item.category}</TextScheme>
           </View>
         </View>
-
-        <View style={styles().removeIcon}>
-          <Icon
-            ios="ios-remove-circle"
-            android="md-remove-circle"
-            size={27}
-            color={redWaga}
-          />
-        </View>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            dispatch(removeFromFavorite(item.id));
+            // animation on removing item from list
+            LayoutAnimation.configureNext(
+              LayoutAnimation.create(
+                400,
+                LayoutAnimation.Types.easeOut,
+                LayoutAnimation.Properties.opacity,
+              ),
+            );
+          }}>
+          <View style={styles().removeIcon}>
+            <Icon
+              ios="ios-remove-circle"
+              android="md-remove-circle"
+              size={27}
+              color={redWaga}
+            />
+          </View>
+        </TouchableWithoutFeedback>
       </Animatable.View>
     </TouchableWithoutFeedback>
   );
@@ -68,6 +87,10 @@ const styles = colorScheme =>
     },
 
     removeIcon: {
-      marginRight: 15,
+      // marginRight: 15,
+      justifyContent: 'center',
+      alignItems: 'flex-end',
+      // backgroundColor: 'yellow',
+      padding: 15,
     },
   });

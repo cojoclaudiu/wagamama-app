@@ -67,6 +67,7 @@ export default function App() {
 
           <Stack.Screen
             name="Favorite"
+            backgroundColor="red"
             component={FavoriteScreen}
             options={{
               ...stackNavStyle(colorScheme),

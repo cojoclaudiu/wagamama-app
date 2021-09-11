@@ -71,7 +71,12 @@ export default function DishDetails({navigation}) {
           onPress={!isFavorite ? addToFavHandler : removeFavHandler}>
           <View>
             {!isFavorite ? (
-              <Icon size={27} ios="ios-heart-empty" android="md-heart-empty" />
+              <Icon
+                size={27}
+                ios="ios-heart-empty"
+                android="md-heart-empty"
+                color={redWaga}
+              />
             ) : (
               <Icon
                 size={27}

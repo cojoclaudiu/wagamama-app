@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-  Text,
   View,
+  Image,
   StyleSheet,
   FlatList,
   SafeAreaView,
@@ -9,7 +9,9 @@ import {
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import FavoriteItem from '../components/FavoriteItem';
+import TextScheme from '../components/TextScheme';
 import {mainBackground} from '../utilis/appColors';
+import {screenHeight, screenWidth} from '../utilis/screenSize';
 
 export default function FavoriteScreen({navigation}) {
   const colorScheme = useColorScheme();
@@ -21,7 +23,16 @@ export default function FavoriteScreen({navigation}) {
 
   return totalItems === 0 ? (
     <View style={styles(colorScheme).screen}>
-      <Text>You don't any favorite dishes, find your favorites</Text>
+      <View style={styles().imageContainer}>
+        <Image
+          style={styles().image}
+          resizeMode="contain"
+          source={require('../assets/images/no-results.gif')}
+        />
+        <TextScheme style={styles().text}>
+          sorry, you don't have any favorite dishes
+        </TextScheme>
+      </View>
     </View>
   ) : (
     <SafeAreaView style={styles(colorScheme).screen}>
@@ -47,5 +58,21 @@ const styles = colorScheme =>
       alignContent: 'center',
       alignItems: 'center',
       backgroundColor: mainBackground[colorScheme],
+      paddingTop: screenHeight / 5,
+    },
+
+    imageContainer: {
+      width: screenWidth / 1.5,
+      height: screenWidth / 1.5,
+    },
+    image: {
+      width: '100%',
+      height: '100%',
+    },
+
+    text: {
+      fontSize: 16,
+      textAlign: 'center',
+      paddingTop: 10,
     },
   });
