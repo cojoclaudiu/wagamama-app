@@ -1,6 +1,7 @@
 import React, {useEffect, useCallback} from 'react';
 import {
   View,
+  Button,
   StyleSheet,
   ScrollView,
   useColorScheme,
@@ -26,6 +27,7 @@ import Price from '../components/Price';
 import {useDispatch, useSelector} from 'react-redux';
 import {addToFavorite, removeFromFavorite} from '../store/favoriteSlice';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {addItemToCart, removeItemFromCart} from '../store/cartSlice';
 
 export default function DishDetails({navigation}) {
   const dispatch = useDispatch();
@@ -103,6 +105,26 @@ export default function DishDetails({navigation}) {
             source={{uri: itemDetails?.imageUrl}}
           />
         </View>
+
+        <Button
+          title="add to bag"
+          onPress={() =>
+            dispatch(
+              addItemToCart({
+                id: itemDetails.id,
+                category: itemDetails.category,
+                name: itemDetails.name,
+                price: itemDetails.price,
+                image: itemDetails.image,
+              }),
+            )
+          }
+        />
+
+        <Button
+          title="remove from bag"
+          onPress={() => dispatch(removeItemFromCart(itemDetails.id))}
+        />
 
         <View style={styles(colorScheme).itemDetails}>
           <Animatable.View animation="slideInRight">
