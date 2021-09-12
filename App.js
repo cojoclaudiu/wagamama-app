@@ -10,6 +10,7 @@ import {Provider} from 'react-redux';
 import {store} from './store/store';
 import {headerColor, redWaga, textColor} from './utilis/appColors';
 import FavoriteScreen from './screens/FavoriteScreen';
+import OrderScreen from './screens/OrderScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -67,8 +68,15 @@ export default function App() {
 
           <Stack.Screen
             name="Favorite"
-            backgroundColor="red"
             component={FavoriteScreen}
+            options={{
+              ...stackNavStyle(colorScheme),
+            }}
+          />
+
+          <Stack.Screen
+            name="Order"
+            component={OrderScreen}
             options={{
               ...stackNavStyle(colorScheme),
             }}

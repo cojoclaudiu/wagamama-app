@@ -13,6 +13,13 @@ export default function HomeScreen({navigation}) {
       <HomeScreenDetails />
 
       <Button
+        title="Bag"
+        onPress={() => {
+          navigation.navigate('Order');
+        }}
+      />
+
+      <Button
         title="Favorites"
         onPress={() => {
           navigation.navigate('Favorite');

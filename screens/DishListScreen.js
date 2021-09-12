@@ -45,6 +45,7 @@ export default function DishScreen({navigation}) {
 const styles = colorScheme =>
   StyleSheet.create({
     screen: {
+      flex: 1,
       backgroundColor: screenBackground[colorScheme],
     },
   });
