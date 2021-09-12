@@ -6,9 +6,12 @@ export const textDarkBg = '#1E2124';
 
 export const mainBackground = {light: 'white', dark: '#34383F'};
 
-export const screenBackground = {light: '#F1F1F7', dark: '#34383F'};
+export const screenBackground = {light: 'white', dark: '#34383F'};
 
-export const itemThumbnail = {light: 'white', dark: textDarkBg};
+export const itemThumbnail = {
+  light: '#F2F5F8',
+  dark: textDarkBg,
+};
 
 export const borderThumbnail = {light: '#DCDEE0', dark: '#181a1d'};
 
@@ -27,3 +30,5 @@ export const redWaga = '#E63228';
 export const greenWaga = '#33A852';
 
 export const redLabel = {light: redWaga, dark: '#DBDDDE'};
+
+export const addRemove = {light: '#dcdcdd', dark: '#41444A'};

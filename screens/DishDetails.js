@@ -1,25 +1,12 @@
 import React, {useEffect, useCallback} from 'react';
-import {
-  View,
-  Button,
-  StyleSheet,
-  ScrollView,
-  useColorScheme,
-  TouchableWithoutFeedback,
-} from 'react-native';
-import Icon from 'react-native-ionicons';
+import {View, StyleSheet, ScrollView, useColorScheme} from 'react-native';
 
 import * as Animatable from 'react-native-animatable';
 import TextScheme from '../components/TextScheme';
 import useFetch from '../hooks/useFetch';
 import {screenHeight, screenWidth} from '../utilis/screenSize';
 import NutritionalInfo from '../components/NutritionalInfo';
-import {
-  mainBackground,
-  redWaga,
-  screenBackground,
-  textDarkBg,
-} from '../utilis/appColors';
+import {itemThumbnail, mainBackground, textDarkBg} from '../utilis/appColors';
 import LoadingScreen from '../components/LoadingScreen';
 import apiCategory from '../utilis/apiRoutes';
 import Allergens from '../components/Allergens';
@@ -27,7 +14,8 @@ import Price from '../components/Price';
 import {useDispatch, useSelector} from 'react-redux';
 import {addToFavorite, removeFromFavorite} from '../store/favoriteSlice';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {addItemToCart, removeItemFromCart} from '../store/cartSlice';
+import HeartButton from '../components/HeartButton';
+import BagButtons from '../components/BagButtons';
 
 export default function DishDetails({navigation}) {
   const dispatch = useDispatch();
@@ -46,7 +34,7 @@ export default function DishDetails({navigation}) {
         isFavorite: true,
         id: itemDetails?.id,
         category: itemDetails.category,
-        name: itemDetails?.name,
+        name: itemDetails?.name.toLowerCase(),
         image: itemDetails?.imageUrl,
         price: itemDetails?.price,
       }),
@@ -69,26 +57,10 @@ export default function DishDetails({navigation}) {
       title: itemDetails?.name.toLowerCase(),
 
       headerRight: () => (
-        <TouchableWithoutFeedback
-          onPress={!isFavorite ? addToFavHandler : removeFavHandler}>
-          <View>
-            {!isFavorite ? (
-              <Icon
-                size={27}
-                ios="ios-heart-empty"
-                android="md-heart-empty"
-                color={redWaga}
-              />
-            ) : (
-              <Icon
-                size={27}
-                ios="ios-heart"
-                android="md-heart"
-                color={redWaga}
-              />
-            )}
-          </View>
-        </TouchableWithoutFeedback>
+        <HeartButton
+          favorite={!isFavorite}
+          onPress={!isFavorite ? addToFavHandler : removeFavHandler}
+        />
       ),
     });
   }, [itemDetails, navigation, addToFavHandler, removeFavHandler, isFavorite]);
@@ -106,25 +78,7 @@ export default function DishDetails({navigation}) {
           />
         </View>
 
-        <Button
-          title="add to bag"
-          onPress={() =>
-            dispatch(
-              addItemToCart({
-                id: itemDetails.id,
-                category: itemDetails.category,
-                name: itemDetails.name,
-                price: itemDetails.price,
-                image: itemDetails.image,
-              }),
-            )
-          }
-        />
-
-        <Button
-          title="remove from bag"
-          onPress={() => dispatch(removeItemFromCart(itemDetails.id))}
-        />
+        <BagButtons item={itemDetails} />
 
         <View style={styles(colorScheme).itemDetails}>
           <Animatable.View animation="slideInRight">
@@ -158,7 +112,7 @@ const styles = colorScheme =>
     description: {
       textAlign: 'justify',
       backgroundColor:
-        colorScheme === 'dark' ? textDarkBg : screenBackground.light,
+        colorScheme === 'dark' ? textDarkBg : itemThumbnail.light,
       borderRadius: 4,
       padding: 10,
       overflow: 'hidden',

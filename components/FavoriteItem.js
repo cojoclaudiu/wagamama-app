@@ -70,8 +70,6 @@ const styles = colorScheme =>
       justifyContent: 'space-between',
       width: screenWidth - 40,
       backgroundColor: itemThumbnail[colorScheme],
-      borderColor: borderThumbnail[colorScheme],
-      borderWidth: 1,
       borderRadius: 5,
       marginVertical: 5,
     },
