@@ -3,10 +3,10 @@ import {View, TouchableWithoutFeedback} from 'react-native';
 import {redWaga} from '../utilis/appColors';
 import Icon from 'react-native-ionicons';
 
-export default function HeartButton({onPress, favorite}) {
+export default function HeartButton({onPress, favorite, style}) {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <View>
+      <View style={{...style}}>
         {favorite ? (
           <Icon
             size={27}

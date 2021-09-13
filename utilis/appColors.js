@@ -28,7 +28,13 @@ export const allergensBackground = {
 
 export const redWaga = '#E63228';
 export const greenWaga = '#33A852';
+// export const increaseDecrease = '#dcdcdd';
 
 export const redLabel = {light: redWaga, dark: '#DBDDDE'};
 
-export const addRemove = {light: '#dcdcdd', dark: '#41444A'};
+export const increaseDecrease = {
+  light: '#dcdcdd',
+  dark: '#41444A',
+  increase: greenWaga,
+  decrease: redWaga,
+};
