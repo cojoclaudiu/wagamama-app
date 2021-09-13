@@ -3,10 +3,12 @@ import {View, TouchableWithoutFeedback, StyleSheet} from 'react-native';
 import TextScheme from './TextScheme';
 import {useDispatch} from 'react-redux';
 import {addItemToCart, removeItemFromCart} from '../store/cartSlice';
-import {greenWaga, redWaga} from '../utilis/appColors';
+import {greenWaga} from '../utilis/appColors';
 import {useSelector} from 'react-redux';
+import * as Animatable from 'react-native-animatable';
+import Icon from 'react-native-ionicons';
 
-export default function BagButtons({item}) {
+export default function OrderButtons({item}) {
   const id = useSelector(state =>
     state.cart.cartItems.find(dish => dish.id === item.id),
   );
@@ -27,16 +29,29 @@ export default function BagButtons({item}) {
               }),
             )
           }>
-          <View style={styles('order').button}>
-            <TextScheme>order</TextScheme>
-          </View>
+          <Animatable.View animation="fadeInLeft" style={styles('add').button}>
+            <TextScheme style={styles().textButton} fontWeight="bold">
+              add to bag
+            </TextScheme>
+            <Icon ios="ios-add" android="md-add" color="white" size={23} />
+          </Animatable.View>
         </TouchableWithoutFeedback>
       ) : (
         <TouchableWithoutFeedback
           onPress={() => dispatch(removeItemFromCart(item.id))}>
-          <View style={styles('remove').button}>
-            <TextScheme>remove</TextScheme>
-          </View>
+          <Animatable.View
+            animation="fadeInLeft"
+            style={styles('added').button}>
+            <TextScheme style={styles().textButton} fontWeight="bold">
+              added to your bag
+            </TextScheme>
+            <Icon
+              ios="ios-checkmark"
+              android="md-checkmark"
+              color="white"
+              size={23}
+            />
+          </Animatable.View>
         </TouchableWithoutFeedback>
       )}
     </View>
@@ -46,20 +61,23 @@ export default function BagButtons({item}) {
 const styles = type =>
   StyleSheet.create({
     buttonsContainer: {
-      // backgroundColor: 'red',
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-      alignSelf: 'center',
-      width: '50%',
+      margin: 20,
+      alignItems: 'center',
     },
 
     button: {
-      padding: 10,
+      width: '100%',
+      flexDirection: 'row',
+      paddingVertical: 10,
       justifyContent: 'center',
       alignItems: 'center',
       borderRadius: 5,
       backgroundColor:
-        (type === 'order' && greenWaga) || (type === 'remove' && redWaga),
-      width: 80,
+        (type === 'add' && greenWaga) || (type === 'added' && '#288641'),
+    },
+
+    textButton: {
+      color: 'white',
+      marginRight: 5,
     },
   });

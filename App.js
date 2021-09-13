@@ -4,7 +4,7 @@ import TextScheme from './components/TextScheme';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
-import DishScreen from './screens/DishListScreen.js';
+import DishListScreen from './screens/DishListScreen.js';
 import DishDetails from './screens/DishDetails';
 import {Provider} from 'react-redux';
 import {store} from './store/store';
@@ -54,9 +54,9 @@ export default function App() {
           />
 
           <Stack.Screen
-            name="DishScreen"
-            component={DishScreen}
-            options={stackNavStyle(colorScheme)}
+            name="DishListScreen"
+            component={DishListScreen}
+            options={{...stackNavStyle(colorScheme)}}
           />
           <Stack.Screen
             name="DishDetails"

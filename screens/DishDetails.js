@@ -15,7 +15,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {addToFavorite, removeFromFavorite} from '../store/favoriteSlice';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import HeartButton from '../components/HeartButton';
-import BagButtons from '../components/BagButtons';
+import OrderButtons from '../components/OrderButtons';
 
 export default function DishDetails({navigation}) {
   const dispatch = useDispatch();
@@ -70,15 +70,16 @@ export default function DishDetails({navigation}) {
       edges={['left', 'right', 'bottom']}
       style={styles(colorScheme).screen}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles().imageContainer}>
+        <View style={styles(colorScheme).imageContainer}>
           <Animatable.Image
             animation="fadeInDownBig"
-            style={styles().image}
             source={{uri: itemDetails?.imageUrl}}
+            resizeMode="cover"
+            style={styles().image}
           />
         </View>
 
-        <BagButtons item={itemDetails} />
+        <OrderButtons item={itemDetails} />
 
         <View style={styles(colorScheme).itemDetails}>
           <Animatable.View animation="slideInRight">
@@ -120,8 +121,11 @@ const styles = colorScheme =>
     },
 
     imageContainer: {
+      flex: 1,
       width: screenWidth,
       height: screenHeight / 2,
+      backgroundColor:
+        colorScheme === 'dark' ? textDarkBg : itemThumbnail.light,
     },
 
     image: {

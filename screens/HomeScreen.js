@@ -30,7 +30,7 @@ export default function HomeScreen({navigation}) {
         title="Go to RAMEN..."
         onPress={() => {
           dispatch(setCategory({category: 'ramen'}));
-          navigation.navigate('DishScreen');
+          navigation.navigate('DishListScreen');
         }}
       />
 
@@ -38,14 +38,14 @@ export default function HomeScreen({navigation}) {
         title="Go to CURRY..."
         onPress={() => {
           dispatch(setCategory({category: 'curry'}));
-          navigation.navigate('DishScreen');
+          navigation.navigate('DishListScreen');
         }}
       />
       <Button
         title="Go to TEPPANYAKI..."
         onPress={() => {
           dispatch(setCategory({category: 'teppanyaki'}));
-          navigation.navigate('DishScreen');
+          navigation.navigate('DishListScreen');
         }}
       />
     </ScrollView>

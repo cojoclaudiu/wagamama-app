@@ -9,7 +9,7 @@ import {screenBackground} from '../utilis/appColors';
 import {useSelector} from 'react-redux';
 import apiCategory from '../utilis/apiRoutes';
 
-export default function DishScreen({navigation}) {
+export default function DishListScreen({navigation}) {
   const colorScheme = useColorScheme();
 
   const category = useSelector(state => state.category.category.category);

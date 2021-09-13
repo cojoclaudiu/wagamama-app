@@ -11,7 +11,7 @@ import * as Animatable from 'react-native-animatable';
 import TextScheme from './TextScheme';
 import {setId} from '../store/dishSlice';
 import {setCategory} from '../store/categorySlice';
-import {itemThumbnail, borderThumbnail, redWaga} from '../utilis/appColors';
+import {itemThumbnail, redWaga} from '../utilis/appColors';
 import {screenWidth} from '../utilis/screenSize';
 import Icon from 'react-native-ionicons';
 import {removeFromFavorite} from '../store/favoriteSlice';

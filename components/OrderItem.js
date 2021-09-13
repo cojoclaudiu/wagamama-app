@@ -1,17 +1,19 @@
 import React from 'react';
-import {View, Image, TouchableWithoutFeedback, StyleSheet} from 'react-native';
-import Icon from 'react-native-ionicons';
+import {View, StyleSheet} from 'react-native';
 import {screenWidth} from '../utilis/screenSize';
 import TextScheme from '../components/TextScheme';
 import priceFormat from '../utilis/priceFormat';
-import {useDispatch} from 'react-redux';
-import {addItemToCart, removeItemFromCart} from '../store/cartSlice';
-import {addRemove, itemThumbnail, textColor} from '../utilis/appColors';
+import {itemThumbnail} from '../utilis/appColors';
+import ImageOrderScreen from '../components/ImageOrderScreen';
+import QuantityOrderButtons from '../components/QuantityOrderButtons';
+import * as Animatable from 'react-native-animatable';
+import AnimationProvider from '../context/animationContext';
 
-export default function OrderItem({item, colorScheme}) {
-  const dispatch = useDispatch();
+export default function OrderItem({item, colorScheme, navigation}) {
   return (
-    <View style={styles(colorScheme).orderContainer}>
+    <Animatable.View
+      animation="zoomIn"
+      style={styles(colorScheme).orderContainer}>
       <View style={styles().priceQtyContainer}>
         <View style={styles().totalProductQty}>
           <TextScheme fontWeight="bold">Product quantity: </TextScheme>
@@ -23,31 +25,13 @@ export default function OrderItem({item, colorScheme}) {
         </View>
       </View>
 
-      <View style={styles().imageButtonsContainer}>
-        <TouchableWithoutFeedback
-          onPress={() =>
-            dispatch(
-              addItemToCart({
-                id: item.id,
-                price: item.price,
-              }),
-            )
-          }>
-          <View style={styles(colorScheme).qtyButton}>
-            <Icon ios="ios-add" android="md-add" />
-          </View>
-        </TouchableWithoutFeedback>
-
-        <View style={styles().imageContainer}>
-          <Image style={styles().image} source={{uri: item.image}} />
+      <AnimationProvider>
+        <View style={styles().imageButtonsContainer}>
+          <QuantityOrderButtons item={item} colorScheme={colorScheme}>
+            <ImageOrderScreen navigation={navigation} item={item} />
+          </QuantityOrderButtons>
         </View>
-        <TouchableWithoutFeedback
-          onPress={() => dispatch(removeItemFromCart(item.id))}>
-          <View style={styles(colorScheme).qtyButton}>
-            <Icon ios="ios-remove" android="md-remove" />
-          </View>
-        </TouchableWithoutFeedback>
-      </View>
+      </AnimationProvider>
 
       <View style={styles().titlePriceContainer}>
         <TextScheme fontWeight="500" style={styles().itemName}>
@@ -55,7 +39,7 @@ export default function OrderItem({item, colorScheme}) {
         </TextScheme>
         <TextScheme fontWeight="bold">{priceFormat(item.price)}</TextScheme>
       </View>
-    </View>
+    </Animatable.View>
   );
 }
 
@@ -76,25 +60,6 @@ const styles = colorScheme =>
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-around',
-    },
-
-    imageContainer: {
-      width: screenWidth / 3.5,
-      height: screenWidth / 3.5,
-    },
-
-    image: {
-      width: '100%',
-      height: '100%',
-    },
-
-    qtyButton: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: addRemove[colorScheme],
-      borderRadius: 5,
-      width: 40,
-      height: 40,
     },
 
     titlePriceContainer: {
