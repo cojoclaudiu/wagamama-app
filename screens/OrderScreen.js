@@ -11,6 +11,8 @@ export default function OrderScreen({navigation}) {
   const colorScheme = useColorScheme();
   const cart = useSelector(state => state.cart);
   const {cartItems} = cart;
+  const reverseItems = [...cartItems].reverse();
+
   const {totalCartAmount} = cart;
 
   return (
@@ -21,7 +23,7 @@ export default function OrderScreen({navigation}) {
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         contentInsetAdjustmentBehavior="automatic"
-        data={cartItems}
+        data={reverseItems}
         renderItem={({item}) => (
           <OrderItem
             navigation={navigation}
