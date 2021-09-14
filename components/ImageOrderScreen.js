@@ -5,12 +5,11 @@ import {screenWidth} from '../utilis/screenSize';
 import {setId} from '../store/dishSlice';
 import {setCategory} from '../store/categorySlice';
 import * as Animatable from 'react-native-animatable';
-import {AnimationContext} from '../context/animationContext';
+import {CartItemContext} from '../context/cartItemContext';
 
 export default function ImageOrderScreen({navigation, item}) {
   const dispatch = useDispatch();
-  const {animation} = useContext(AnimationContext);
-  // console.log(animation);
+  const {animation} = useContext(CartItemContext);
 
   return (
     <TouchableWithoutFeedback

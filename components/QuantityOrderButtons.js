@@ -3,13 +3,11 @@ import {TouchableWithoutFeedback, View, StyleSheet} from 'react-native';
 import {addItemToCart, removeItemFromCart} from '../store/cartSlice';
 import {useDispatch} from 'react-redux';
 import {increaseDecrease} from '../utilis/appColors';
-
+import {CartItemContext} from '../context/cartItemContext';
 import Icon from 'react-native-ionicons';
-import {AnimationContext} from '../context/animationContext';
 
 export default function QuantityOrderButtons({children, item, colorScheme}) {
-  const {setAnimation} = useContext(AnimationContext);
-  // console.log(setAnimation);
+  const {setAnimation} = useContext(CartItemContext);
 
   const [colorIncrease, setColorIncrease] = useState('');
   const [colorDecrease, setColorDecrease] = useState('');

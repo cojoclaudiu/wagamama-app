@@ -38,3 +38,8 @@ export const increaseDecrease = {
   increase: greenWaga,
   decrease: redWaga,
 };
+
+export const overlayBackground = {
+  light: 'rgba(241, 245, 247, 0.8)',
+  dark: 'rgba(51, 56, 62, 0.7)',
+};

@@ -5,6 +5,7 @@ import {useSelector} from 'react-redux';
 import CompleteOrderButton from '../components/CompleteOrderButton';
 import OrderItem from '../components/OrderItem';
 import TotalOrderPrice from '../components/TotalOrderPrice';
+import CartItemProvider from '../context/cartItemContext';
 import {screenBackground} from '../utilis/appColors';
 
 export default function OrderScreen({navigation}) {
@@ -24,12 +25,15 @@ export default function OrderScreen({navigation}) {
         showsHorizontalScrollIndicator={false}
         contentInsetAdjustmentBehavior="automatic"
         data={reverseItems}
-        renderItem={({item}) => (
-          <OrderItem
-            navigation={navigation}
-            colorScheme={colorScheme}
-            item={item}
-          />
+        renderItem={({item, index}) => (
+          <CartItemProvider>
+            <OrderItem
+              index={index}
+              navigation={navigation}
+              colorScheme={colorScheme}
+              item={item}
+            />
+          </CartItemProvider>
         )}
         ListFooterComponent={
           <>

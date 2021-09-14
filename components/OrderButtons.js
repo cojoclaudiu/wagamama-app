@@ -2,7 +2,11 @@ import React from 'react';
 import {View, TouchableWithoutFeedback, StyleSheet} from 'react-native';
 import TextScheme from './TextScheme';
 import {useDispatch} from 'react-redux';
-import {addItemToCart, removeItemFromCart} from '../store/cartSlice';
+import {
+  addItemToCart,
+  removeItemFromCart,
+  removeCompletely,
+} from '../store/cartSlice';
 import {greenWaga} from '../utilis/appColors';
 import {useSelector} from 'react-redux';
 import * as Animatable from 'react-native-animatable';
@@ -38,7 +42,7 @@ export default function OrderButtons({item}) {
         </TouchableWithoutFeedback>
       ) : (
         <TouchableWithoutFeedback
-          onPress={() => dispatch(removeItemFromCart(item.id))}>
+          onPress={() => dispatch(removeCompletely(item.id))}>
           <Animatable.View
             animation="fadeInLeft"
             style={styles('added').button}>

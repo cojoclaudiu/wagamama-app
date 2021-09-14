@@ -15,6 +15,7 @@ import {itemThumbnail, redWaga} from '../utilis/appColors';
 import {screenWidth} from '../utilis/screenSize';
 import Icon from 'react-native-ionicons';
 import {removeFromFavorite} from '../store/favoriteSlice';
+import {layoutAnimConfig} from '../utilis/animations';
 
 export default function FavoriteItem({navigation, item, colorScheme}) {
   const dispatch = useDispatch();
@@ -40,13 +41,7 @@ export default function FavoriteItem({navigation, item, colorScheme}) {
           onPress={() => {
             dispatch(removeFromFavorite(item.id));
             // animation on removing item from list
-            LayoutAnimation.configureNext(
-              LayoutAnimation.create(
-                400,
-                LayoutAnimation.Types.easeOut,
-                LayoutAnimation.Properties.opacity,
-              ),
-            );
+            LayoutAnimation.configureNext(layoutAnimConfig(LayoutAnimation));
           }}>
           <View style={styles().removeIcon}>
             <Icon

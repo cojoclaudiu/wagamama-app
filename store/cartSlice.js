@@ -69,8 +69,19 @@ const cartSlice = createSlice({
         );
       }
     },
+
+    removeCompletely: (state, action) => {
+      const id = action.payload;
+      const existingItem = state.cartItems.find(item => item.id === id);
+      state.totalCartAmount =
+        state.totalCartAmount - existingItem.totalProductPrice;
+
+      state.cartItems = state.cartItems.filter(item => item.id !== id);
+      console.log(state.cartItems);
+    },
   },
 });
 
-export const {addItemToCart, removeItemFromCart} = cartSlice.actions;
+export const {addItemToCart, removeItemFromCart, removeCompletely} =
+  cartSlice.actions;
 export default cartSlice.reducer;
