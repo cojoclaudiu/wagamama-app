@@ -7,7 +7,13 @@ import {setCategory} from '../store/categorySlice';
 import * as Animatable from 'react-native-animatable';
 import {CartItemContext} from '../context/cartItemContext';
 
-export default function ImageOrderScreen({navigation, item}) {
+export default function ImageOrderScreen({
+  navigation,
+  item,
+  setSelectedItem,
+  setOverlay,
+  index,
+}) {
   const dispatch = useDispatch();
   const {animation} = useContext(CartItemContext);
 
@@ -17,6 +23,10 @@ export default function ImageOrderScreen({navigation, item}) {
         navigation.navigate('DishDetails');
         dispatch(setId({id: item.id}));
         dispatch(setCategory({category: item.category}));
+      }}
+      onLongPress={() => {
+        setSelectedItem(index);
+        setOverlay(true);
       }}>
       <View style={styles.imageContainer}>
         <Animatable.Image

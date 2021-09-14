@@ -13,7 +13,6 @@ import {CartItemContext} from '../context/cartItemContext';
 export default function OrderItem({item, colorScheme, navigation, index}) {
   const [selectedItem, setSelectedItem] = useState(null);
   const {overlay, setOverlay} = useContext(CartItemContext);
-  console.log(overlay);
 
   return (
     <TouchableWithoutFeedback
@@ -38,7 +37,13 @@ export default function OrderItem({item, colorScheme, navigation, index}) {
 
         <View style={styles().imageButtonsContainer}>
           <QuantityOrderButtons item={item} colorScheme={colorScheme}>
-            <ImageOrderScreen navigation={navigation} item={item} />
+            <ImageOrderScreen
+              index={index}
+              setSelectedItem={setSelectedItem}
+              setOverlay={setOverlay}
+              navigation={navigation}
+              item={item}
+            />
           </QuantityOrderButtons>
         </View>
 
