@@ -11,10 +11,10 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2C34BCF5780F408F8EF83E37 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEB844FF04E24154B791766D /* Ionicons.ttf */; };
 		7D12E38FCF7156B86D15855F /* libPods-wagamama.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99E60CE716BB4418B2A431EE /* libPods-wagamama.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		CE53EA49856773BB0305AC16 /* libPods-wagamama-wagamamaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8051EF8BE5F7484C607428AD /* libPods-wagamama-wagamamaTests.a */; };
-		2C34BCF5780F408F8EF83E37 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEB844FF04E24154B791766D /* Ionicons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +45,7 @@
 		C08AFE89D83C5401A635B5B5 /* Pods-wagamama-wagamamaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wagamama-wagamamaTests.debug.xcconfig"; path = "Target Support Files/Pods-wagamama-wagamamaTests/Pods-wagamama-wagamamaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F22F653867C37F5F0D50F9D0 /* Pods-wagamama.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wagamama.release.xcconfig"; path = "Target Support Files/Pods-wagamama/Pods-wagamama.release.xcconfig"; sourceTree = "<group>"; };
-		FEB844FF04E24154B791766D /* Ionicons.ttf */ = {isa = PBXFileReference; name = "Ionicons.ttf"; path = "../node_modules/react-native-ionicons/fonts/Ionicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FEB844FF04E24154B791766D /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-ionicons/fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +108,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		58E27CB83AD649209F25E093 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FEB844FF04E24154B791766D /* Ionicons.ttf */,
+			);
+			name = Resources;
+			path = "";
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,15 +160,6 @@
 			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
-		};
-		58E27CB83AD649209F25E093 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				FEB844FF04E24154B791766D /* Ionicons.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
