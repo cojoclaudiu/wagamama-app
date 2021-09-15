@@ -7,14 +7,14 @@ import {
   TouchableWithoutFeedback,
   useColorScheme,
 } from 'react-native';
-
 import * as Animatable from 'react-native-animatable';
 
 import TextScheme from './TextScheme';
 import {useDispatch} from 'react-redux';
-import {screenHeight} from '../utilis/screenSize';
+import {screenHeight, screenWidth} from '../utilis/screenSize';
 import {setId} from '../store/dishSlice';
-import {borderThumbnail, itemThumbnail} from '../utilis/appColors';
+import {itemThumbnail} from '../utilis/appColors';
+import {borderRadius} from '../utilis/styleSizes';
 
 export default function Item({data, navigation}) {
   const colorScheme = useColorScheme();
@@ -52,7 +52,6 @@ export default function Item({data, navigation}) {
     </TouchableWithoutFeedback>
   );
 }
-
 const styles = colorScheme =>
   StyleSheet.create({
     itemsContainer: {
@@ -61,7 +60,7 @@ const styles = colorScheme =>
       alignContent: 'space-around',
       alignItems: 'center',
 
-      borderRadius: 5,
+      borderRadius: (screenWidth / 5) * 0.2237,
       backgroundColor: itemThumbnail[colorScheme],
       margin: 10,
       overflow: 'hidden',

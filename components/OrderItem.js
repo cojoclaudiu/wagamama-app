@@ -70,7 +70,7 @@ const styles = colorScheme =>
       height: screenHeight / 4.5,
       width: screenWidth / 1.05,
       margin: 10,
-      borderRadius: 5,
+      borderRadius: (screenWidth / 5) * 0.2237,
       padding: 10,
       justifyContent: 'center',
       alignSelf: 'center',

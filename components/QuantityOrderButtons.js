@@ -1,10 +1,16 @@
 import React, {useState, useContext} from 'react';
-import {TouchableWithoutFeedback, View, StyleSheet} from 'react-native';
+import {
+  TouchableWithoutFeedback,
+  View,
+  StyleSheet,
+  LayoutAnimation,
+} from 'react-native';
 import {addItemToCart, removeItemFromCart} from '../store/cartSlice';
 import {useDispatch} from 'react-redux';
 import {increaseDecrease} from '../utilis/appColors';
 import {CartItemContext} from '../context/cartItemContext';
 import Icon from 'react-native-ionicons';
+import {layoutAnimConfig} from '../utilis/animations';
 
 export default function QuantityOrderButtons({children, item, colorScheme}) {
   const {setAnimation} = useContext(CartItemContext);
@@ -48,6 +54,7 @@ export default function QuantityOrderButtons({children, item, colorScheme}) {
         onPressOut={() => {
           setColorDecrease('');
           setAnimation('');
+          LayoutAnimation.configureNext(layoutAnimConfig(LayoutAnimation));
         }}>
         <View style={styles(colorScheme, colorDecrease).qtyButton}>
           <Icon ios="ios-remove" android="md-remove" />
