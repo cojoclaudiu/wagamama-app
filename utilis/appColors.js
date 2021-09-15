@@ -2,7 +2,7 @@ export const nativeIos = {light: '#007DFF', dark: '#3397ff'};
 
 export const iosBg = '#F1F1F7';
 
-export const textDarkBg = '#1E2124';
+export const textDarkBg = '#1C1D1E';
 
 export const mainBackground = {light: 'white', dark: '#34383F'};
 
@@ -12,8 +12,6 @@ export const itemThumbnail = {
   light: '#F2F5F8',
   dark: textDarkBg,
 };
-
-export const borderThumbnail = {light: '#DCDEE0', dark: '#181a1d'};
 
 export const borderColor = {light: '#DCDEE0', dark: '#41444A'};
 

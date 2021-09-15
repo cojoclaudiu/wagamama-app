@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import FavoriteItem from '../components/FavoriteItem';
-import TextScheme from '../components/TextScheme';
+import NoResults from '../components/NoResults';
 import {mainBackground} from '../utilis/appColors';
 import {screenHeight, screenWidth} from '../utilis/screenSize';
 
@@ -21,33 +21,28 @@ export default function FavoriteScreen({navigation}) {
   // I'm reversing the array because my last added item have to be first on the list
   const reverseItems = [...favItems].reverse();
 
-  return totalItems === 0 ? (
-    <View style={styles(colorScheme).screen}>
-      <View style={styles().imageContainer}>
-        <Image
-          style={styles().image}
-          resizeMode="contain"
-          source={require('../assets/images/no-results.gif')}
-        />
-        <TextScheme style={styles().text}>
-          sorry, you don't have any favorite dishes
-        </TextScheme>
-      </View>
-    </View>
-  ) : (
+  return (
     <SafeAreaView style={styles(colorScheme).screen}>
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
-        data={reverseItems}
-        renderItem={({item}) => (
-          <FavoriteItem
-            colorScheme={colorScheme}
-            item={item}
-            navigation={navigation}
-          />
-        )}
-      />
+      {totalItems === 0 ? (
+        <NoResults
+          description="sorry, you don't have any favorite dishes"
+          navigation={navigation}
+          destination="Home"
+        />
+      ) : (
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          data={reverseItems}
+          renderItem={({item}) => (
+            <FavoriteItem
+              colorScheme={colorScheme}
+              item={item}
+              navigation={navigation}
+            />
+          )}
+        />
+      )}
     </SafeAreaView>
   );
 }
@@ -59,20 +54,5 @@ const styles = colorScheme =>
       alignItems: 'center',
       backgroundColor: mainBackground[colorScheme],
       paddingTop: screenHeight / 5,
-    },
-
-    imageContainer: {
-      width: screenWidth / 1.5,
-      height: screenWidth / 1.5,
-    },
-    image: {
-      width: '100%',
-      height: '100%',
-    },
-
-    text: {
-      fontSize: 16,
-      textAlign: 'center',
-      paddingTop: 10,
     },
   });

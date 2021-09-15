@@ -1,53 +1,53 @@
 import React from 'react';
-import {Button, StyleSheet, useColorScheme, ScrollView} from 'react-native';
+import {StyleSheet, useColorScheme, ScrollView, View} from 'react-native';
 import HomeScreenDetails from '../components/HomeScreenData';
 import {screenBackground} from '../utilis/appColors';
-import {useDispatch} from 'react-redux';
-import {setCategory} from '../store/categorySlice';
+import GoToButton from '../components/GoToButton';
+import HalfScreenButton from '../components/HalfScreenButton';
 
 export default function HomeScreen({navigation}) {
-  const dispatch = useDispatch();
+  const colorScheme = useColorScheme();
 
   return (
-    <ScrollView style={styles(useColorScheme()).screen}>
-      <HomeScreenDetails />
+    <ScrollView style={styles(colorScheme).screen}>
+      <View style={styles().screenItems}>
+        <HomeScreenDetails />
 
-      <Button
-        title="Bag"
-        onPress={() => {
-          navigation.navigate('Order');
-        }}
-      />
+        <View style={styles().buttonsContainer}>
+          <HalfScreenButton
+            name="shopping bag"
+            position="left"
+            color="green"
+            navigation={navigation}
+            destination="Order"
+          />
+          <HalfScreenButton
+            name="favorites"
+            position="right"
+            color="red"
+            navigation={navigation}
+            destination="Favorite"
+          />
+        </View>
 
-      <Button
-        title="Favorites"
-        onPress={() => {
-          navigation.navigate('Favorite');
-        }}
-      />
+        <GoToButton
+          name="ramen"
+          navigation={navigation}
+          colorScheme={colorScheme}
+        />
 
-      <Button
-        title="Go to RAMEN..."
-        onPress={() => {
-          dispatch(setCategory({category: 'ramen'}));
-          navigation.navigate('DishListScreen');
-        }}
-      />
+        <GoToButton
+          name="curry"
+          navigation={navigation}
+          colorScheme={colorScheme}
+        />
 
-      <Button
-        title="Go to CURRY..."
-        onPress={() => {
-          dispatch(setCategory({category: 'curry'}));
-          navigation.navigate('DishListScreen');
-        }}
-      />
-      <Button
-        title="Go to TEPPANYAKI..."
-        onPress={() => {
-          dispatch(setCategory({category: 'teppanyaki'}));
-          navigation.navigate('DishListScreen');
-        }}
-      />
+        <GoToButton
+          name="teppanyaki"
+          navigation={navigation}
+          colorScheme={colorScheme}
+        />
+      </View>
     </ScrollView>
   );
 }
@@ -57,5 +57,14 @@ const styles = colorScheme =>
     screen: {
       flex: 1,
       backgroundColor: screenBackground[colorScheme],
+    },
+    screenItems: {
+      marginHorizontal: 10,
+    },
+
+    buttonsContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      padding: 20,
     },
   });

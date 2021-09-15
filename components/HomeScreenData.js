@@ -8,6 +8,7 @@ export default function HomeScreenDetails() {
     <>
       <View style={styles.imageContainer}>
         <Image
+          resizeMode="cover"
           style={styles.image}
           source={require('../assets/images/waga-main-mobile.png')}
         />
@@ -53,19 +54,21 @@ const styles = StyleSheet.create({
   },
 
   imageContainer: {
-    width: screenWidth,
-    height: screenHeight / 3,
+    width: screenWidth - 20,
+    height: screenHeight / 5,
+    alignSelf: 'center',
+    marginTop: 10,
+    borderRadius: (screenWidth / 5) * 0.2237,
+    overflow: 'hidden',
   },
   image: {
     width: '100%',
     height: '100%',
-    // resizeMode: 'contain',
   },
 
   descriptionContainer: {
     flex: 1,
     height: screenHeight / 4,
     justifyContent: 'space-between',
-    marginHorizontal: 10,
   },
 });

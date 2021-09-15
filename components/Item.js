@@ -14,7 +14,6 @@ import {useDispatch} from 'react-redux';
 import {screenHeight, screenWidth} from '../utilis/screenSize';
 import {setId} from '../store/dishSlice';
 import {itemThumbnail} from '../utilis/appColors';
-import {borderRadius} from '../utilis/styleSizes';
 
 export default function Item({data, navigation}) {
   const colorScheme = useColorScheme();
@@ -28,7 +27,7 @@ export default function Item({data, navigation}) {
       }}>
       <View style={styles(colorScheme).itemsContainer}>
         <View style={styles(colorScheme).imageContainer}>
-          <Animatable.View animation="bounceIn" iterationCount={1}>
+          <Animatable.View animation="zoomIn" iterationCount={1}>
             {!data ? (
               <Text>Loading...</Text>
             ) : (
@@ -43,6 +42,7 @@ export default function Item({data, navigation}) {
         </View>
 
         <TextScheme
+          fontSize={12}
           numberOfLines={1}
           ellipsizeMode="tail"
           style={styles().title}>

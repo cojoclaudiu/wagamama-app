@@ -6,6 +6,7 @@ import CompleteOrderButton from '../components/CompleteOrderButton';
 import OrderItem from '../components/OrderItem';
 import TotalOrderPrice from '../components/TotalOrderPrice';
 import CartItemProvider from '../context/cartItemContext';
+import NoResults from '../components/NoResults';
 import {screenBackground} from '../utilis/appColors';
 
 export default function OrderScreen({navigation}) {
@@ -20,28 +21,36 @@ export default function OrderScreen({navigation}) {
     <SafeAreaView
       edges={['left', 'right', 'bottom']}
       style={styles(colorScheme).screen}>
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
-        contentInsetAdjustmentBehavior="automatic"
-        data={reverseItems}
-        renderItem={({item, index}) => (
-          <CartItemProvider>
-            <OrderItem
-              index={index}
-              navigation={navigation}
-              colorScheme={colorScheme}
-              item={item}
-            />
-          </CartItemProvider>
-        )}
-        ListFooterComponent={
-          <>
-            <TotalOrderPrice totalCartAmount={totalCartAmount} />
-            <CompleteOrderButton />
-          </>
-        }
-      />
+      {cartItems.length === 0 ? (
+        <NoResults
+          description="sorry, you don't have any items in the bag"
+          navigation={navigation}
+          destination="Home"
+        />
+      ) : (
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          contentInsetAdjustmentBehavior="automatic"
+          data={reverseItems}
+          renderItem={({item, index}) => (
+            <CartItemProvider>
+              <OrderItem
+                index={index}
+                navigation={navigation}
+                colorScheme={colorScheme}
+                item={item}
+              />
+            </CartItemProvider>
+          )}
+          ListFooterComponent={
+            <>
+              <TotalOrderPrice totalCartAmount={totalCartAmount} />
+              <CompleteOrderButton />
+            </>
+          }
+        />
+      )}
     </SafeAreaView>
   );
 }
