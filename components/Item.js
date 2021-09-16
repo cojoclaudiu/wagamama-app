@@ -59,7 +59,6 @@ const styles = colorScheme =>
       height: screenHeight / 5,
       alignContent: 'space-around',
       alignItems: 'center',
-
       borderRadius: (screenWidth / 5) * 0.2237,
       backgroundColor: itemThumbnail[colorScheme],
       margin: 10,

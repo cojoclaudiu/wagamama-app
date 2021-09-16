@@ -61,9 +61,6 @@ export default function OrderItem({item, colorScheme, navigation, index}) {
             style={styles().itemName}>
             {item.name}
           </TextScheme>
-          {/* <TextScheme fontWeight="bold" style={styles().productPrice}>
-            {priceFormat(item.price)}
-          </TextScheme> */}
         </View>
 
         {selectedItem === index && overlay && (
