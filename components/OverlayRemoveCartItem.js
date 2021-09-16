@@ -43,7 +43,7 @@ const styles = colorScheme =>
     overlay: {
       flex: 1,
       flexDirection: 'row-reverse',
-      height: screenHeight / 4.5,
+      height: screenHeight / 4.3,
       width: screenWidth / 1.05,
       position: 'absolute',
       backgroundColor: overlayBackground[colorScheme],

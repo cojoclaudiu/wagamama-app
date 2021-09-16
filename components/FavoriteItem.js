@@ -32,8 +32,10 @@ export default function FavoriteItem({navigation, item, colorScheme}) {
         style={styles(colorScheme).favoriteItemContainer}>
         <View style={styles().detailsContainer}>
           <Image style={styles().image} source={{uri: item.image}} />
-          <View>
-            <TextScheme fontWeight="500">{item.name}</TextScheme>
+          <View style={styles().textContainer}>
+            <TextScheme fontWeight="500" numberOfLines={1} ellipsizeMode="tail">
+              {item.name}
+            </TextScheme>
             <TextScheme>category: {item.category}</TextScheme>
           </View>
         </View>
@@ -67,6 +69,10 @@ const styles = colorScheme =>
       backgroundColor: itemThumbnail[colorScheme],
       borderRadius: (screenWidth / 6) * 0.2237,
       marginVertical: 5,
+    },
+
+    textContainer: {
+      width: '60%',
     },
 
     detailsContainer: {

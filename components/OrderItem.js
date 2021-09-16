@@ -29,6 +29,12 @@ export default function OrderItem({item, colorScheme, navigation, index}) {
             <TextScheme fontWeight="bold">Product quantity: </TextScheme>
             <TextScheme>{item.quantity}</TextScheme>
           </View>
+
+          <View style={styles().productPrice}>
+            <TextScheme fontWeight="bold">Product price: </TextScheme>
+            <TextScheme>{priceFormat(item.price)}</TextScheme>
+          </View>
+
           <View style={styles().totalProductPrice}>
             <TextScheme fontWeight="bold">Total product price: </TextScheme>
             <TextScheme>{priceFormat(item.totalProductPrice)}</TextScheme>
@@ -48,10 +54,16 @@ export default function OrderItem({item, colorScheme, navigation, index}) {
         </View>
 
         <View style={styles().titlePriceContainer}>
-          <TextScheme fontWeight="500" style={styles().itemName}>
+          <TextScheme
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            fontWeight="500"
+            style={styles().itemName}>
             {item.name}
           </TextScheme>
-          <TextScheme fontWeight="bold">{priceFormat(item.price)}</TextScheme>
+          {/* <TextScheme fontWeight="bold" style={styles().productPrice}>
+            {priceFormat(item.price)}
+          </TextScheme> */}
         </View>
 
         {selectedItem === index && overlay && (
@@ -67,7 +79,7 @@ const styles = colorScheme =>
     orderContainer: {
       flex: 1,
       backgroundColor: itemThumbnail[colorScheme],
-      height: screenHeight / 4.5,
+      height: screenHeight / 4.3,
       width: screenWidth / 1.05,
       margin: 10,
       borderRadius: (screenWidth / 5) * 0.2237,
@@ -89,6 +101,7 @@ const styles = colorScheme =>
     titlePriceContainer: {
       flexDirection: 'row',
       justifyContent: 'center',
+      alignSelf: 'center',
     },
 
     totalProductQty: {
@@ -101,5 +114,11 @@ const styles = colorScheme =>
 
     itemName: {
       paddingRight: 5,
+      width: '85%',
+      textAlign: 'center',
+    },
+
+    productPrice: {
+      flexDirection: 'row',
     },
   });

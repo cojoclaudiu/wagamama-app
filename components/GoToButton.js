@@ -10,7 +10,7 @@ import * as Animatable from 'react-native-animatable';
 
 export default function GoToButton({navigation, name, colorScheme}) {
   const dispatch = useDispatch();
-  const categoryData = useFetch(apiCategory(name));
+  const categoryData = useFetch(apiCategory(name.replace(/ /g, '%20')));
   const imagesData = categoryData.data?.map(item => item.imageUrl);
 
   const generateRandom = arr => {

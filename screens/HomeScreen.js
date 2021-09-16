@@ -9,7 +9,10 @@ export default function HomeScreen({navigation}) {
   const colorScheme = useColorScheme();
 
   return (
-    <ScrollView style={styles(colorScheme).screen}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
+      style={styles(colorScheme).screen}>
       <View style={styles().screenItems}>
         <HomeScreenDetails />
 
@@ -44,6 +47,29 @@ export default function HomeScreen({navigation}) {
 
         <GoToButton
           name="teppanyaki"
+          navigation={navigation}
+          colorScheme={colorScheme}
+        />
+
+        <GoToButton
+          name="donburi"
+          navigation={navigation}
+          colorScheme={colorScheme}
+        />
+        <GoToButton
+          name="kokoro bowls"
+          navigation={navigation}
+          colorScheme={colorScheme}
+        />
+
+        <GoToButton
+          name="summer noodles"
+          navigation={navigation}
+          colorScheme={colorScheme}
+        />
+
+        <GoToButton
+          name="sides"
           navigation={navigation}
           colorScheme={colorScheme}
         />

@@ -8,6 +8,7 @@ export default function TextScheme({
   children,
   style,
   textAlign,
+  props,
   ...rest
 }) {
   const colorScheme = useColorScheme();
