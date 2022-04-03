@@ -1,5 +1,8 @@
 ##### App preview video: https://www.youtube.com/watch?v=1-uL3ccRFXA
 
+#### JSON Data: https://github.com/cojoclaudiu/wagamama-api
+#### App images: https://github.com/cojoclaudiu/wagamama-images
+
 #### App screenshots
 ![(307) React Native Restaurant App - #DAY 9 - YouTube - 3 23](https://user-images.githubusercontent.com/62800983/161445913-be6c0e3a-34cd-46a2-b46b-509351679f07.jpeg)
 ![(307) React Native Restaurant App - #DAY 9 - YouTube - 3 07](https://user-images.githubusercontent.com/62800983/161445914-eb8fb299-ae06-4565-b91b-74a652d922d6.jpeg)
